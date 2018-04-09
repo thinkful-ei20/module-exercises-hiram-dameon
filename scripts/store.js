@@ -23,10 +23,28 @@ const store = (function() {
       console.log(e.message);
     }
   }
-  function findAndToggleChecked(id){}
-  function findAndUpdateName(id,newName){}
-  function findAndDelete(id){}
+  function findAndToggleChecked(id){
+    let item = this.findById(id);
+    item.checked = !item.checked;
+  }
+  function findAndUpdateName(id,newName){
+    try{
+      Item.validateName(newName);
+      let item = this.findById(newName);
+      this.item.name = newName;
+    }
+    catch(e){
+      return `Cannot update name: ${e.message}`;
+    }
+  }
+  function findAndDelete(id){
+    let item = this.findById(id);
+   
+    let indexOfItem = this.items.findIndex(item);
+    this.items.splice(indexOfItem,1);
+  }
 
+ 
   return {
     findById,
     addItem,
@@ -38,3 +56,4 @@ const store = (function() {
     searchTerm: searchTerm,
   };
 }());
+
