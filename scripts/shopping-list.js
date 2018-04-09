@@ -61,7 +61,7 @@ const shoppingList = (function(){
       store.items.push(Item.create(itemName));
       render();
     } catch (e) {
-      console.log(`Cannot add item: ${error.message}`)
+      console.log(`Cannot add item: ${e.message}`)
     }
   }
   
