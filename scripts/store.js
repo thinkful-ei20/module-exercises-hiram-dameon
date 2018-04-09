@@ -9,10 +9,32 @@ const store = (function() {
   ];
   let hideCheckedItems = false;
   let searchTerm = '';
+  function findById(id){
+    return this.items.find(function(item){
+      return item.id === id;
+    });
+  }
+  function addItem(name){
+    try {
+      Item.validateName(name);
+      this.items.push(Item.create(name));
+    }
+    catch(e){
+      console.log(e.message);
+    }
+  }
+  function findAndToggleChecked(id){}
+  function findAndUpdateName(id,newName){}
+  function findAndDelete(id){}
 
   return {
+    findById,
+    addItem,
+    findAndToggleChecked,
+    findAndUpdateName,
+    findAndDelete,
     items: items,
     hideCheckedItems: hideCheckedItems,
     searchTerm: searchTerm,
-  }
-}())
+  };
+}());
