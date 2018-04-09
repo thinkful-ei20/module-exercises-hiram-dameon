@@ -30,18 +30,19 @@ const store = (function() {
   function findAndUpdateName(id,newName){
     try{
       Item.validateName(newName);
-      let item = this.findById(newName);
-      this.item.name = newName;
+      let item = this.findById(id);
+      item.name = newName;
     }
     catch(e){
       return `Cannot update name: ${e.message}`;
     }
   }
   function findAndDelete(id){
-    let item = this.findById(id);
-   
-    let indexOfItem = this.items.findIndex(item);
-    this.items.splice(indexOfItem,1);
+      
+   let newArray = this.items.filter(function(item){
+      return item.id !== id;
+    });
+    this.items = newArray;
   }
 
  
